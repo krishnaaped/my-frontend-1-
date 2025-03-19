@@ -10,20 +10,25 @@
   <div class="container">
     <header>
       <h1>Inventory Management Dashboard</h1>
+      <p>Upload your CSV file to update inventory records and view current data.</p>
     </header>
-    <section class="upload-section">
-      <h2>Upload Inventory CSV</h2>
-      <form id="uploadForm">
-        <input type="file" id="csvFile" accept=".csv" required>
-        <button type="submit">Upload CSV</button>
-      </form>
-      <div id="uploadMessage" class="message"></div>
-    </section>
-    <section class="inventory-section">
-      <h2>Current Inventory</h2>
-      <button id="refreshBtn">Refresh Inventory</button>
-      <div id="inventoryContainer"></div>
-    </section>
+    <main>
+      <section class="upload-section">
+        <h2>Upload Inventory CSV</h2>
+        <form id="uploadForm">
+          <input type="file" id="csvFile" accept=".csv" required>
+          <button type="submit">Upload CSV</button>
+        </form>
+        <div id="uploadMessage" class="message"></div>
+      </section>
+      <section class="inventory-section">
+        <div class="inventory-header">
+          <h2>Current Inventory</h2>
+          <button id="refreshBtn">Refresh Inventory</button>
+        </div>
+        <div id="inventoryContainer"></div>
+      </section>
+    </main>
   </div>
   <!-- Toast notification container -->
   <div id="toast"></div>
