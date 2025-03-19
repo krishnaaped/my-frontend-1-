@@ -2,16 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Inventory Management</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inventory Management Dashboard</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Upload Inventory CSV</h1>
-  <form id="uploadForm">
-    <input type="file" id="csvFile" accept=".csv" required />
-    <button type="submit">Upload</button>
-  </form>
-  <pre id="result"></pre>
+  <div class="container">
+    <header>
+      <h1>Inventory Management Dashboard</h1>
+    </header>
+
+    <section class="upload-section">
+      <h2>Upload Inventory CSV</h2>
+      <form id="uploadForm">
+        <input type="file" id="csvFile" accept=".csv" required>
+        <button type="submit">Upload CSV</button>
+      </form>
+      <div id="uploadMessage" class="message"></div>
+    </section>
+
+    <section class="inventory-section">
+      <h2>Current Inventory</h2>
+      <button id="refreshBtn">Refresh Inventory</button>
+      <div id="inventoryContainer">
+        <!-- Inventory data will be displayed here -->
+      </div>
+    </section>
+  </div>
+
+  <!-- Toast notification container -->
+  <div id="toast"></div>
 
   <script src="script.js"></script>
 </body>
