@@ -98,6 +98,11 @@ button:hover {
   align-items: center;
 }
 
+.inventory-header .buttons {
+  display: flex;
+  gap: 10px;
+}
+
 #inventoryContainer {
   margin-top: 15px;
   overflow-x: auto;
@@ -139,12 +144,6 @@ table th {
   visibility: hidden;
   transition: opacity 0.5s ease, visibility 0.5s ease;
 }
-
-#toast.show {
-  opacity: 1;
-  visibility: visible;
-}
-
 
 #toast.show {
   opacity: 1;
