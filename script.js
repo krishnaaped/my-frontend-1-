@@ -70,6 +70,3 @@ document.getElementById('refreshBtn').addEventListener('click', fetchInventory);
 
 // Load inventory on page load
 fetchInventory();
-ally, load inventory on page load
-  fetchInventory();
-});
