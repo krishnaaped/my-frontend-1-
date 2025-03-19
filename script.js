@@ -1,5 +1,5 @@
 // Update with your actual Worker URL
-const workerURL = 'https://orker.shubhambalgude226.workers.dev/my-inventory-w
+const workerURL = 'https://orker.shubhambalgude226.workers.dev'
 document.getElementById('uploadForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const fileInput = document.getElementById('csvFile');
