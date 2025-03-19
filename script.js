@@ -1,5 +1,5 @@
-// Update with your actual Worker URL
-const workerURL = 'https://my-inventory-worker.shubhambalgude226.workers.dev'
+// Update with your actual Worker URL provided by Cloudflare.
+const workerURL = 'https://my-inventory-worker.shubhambalgude226.workers.dev';
 
 document.getElementById('uploadForm').addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -41,75 +41,32 @@ async function fetchInventory() {
   }
 }
 
-// Function to display inventory data in a table with an edit button
+// Dynamically generate the inventory table based on CSV columns
 function displayInventory(inventory) {
   const inventoryContainer = document.getElementById('inventoryContainer');
   if (!inventory.length) {
     inventoryContainer.innerHTML = "<p>No inventory data available.</p>";
     return;
   }
+  // Get all keys from the first record dynamically
+  const headers = Object.keys(inventory[0]);
   let table = `<table>
     <thead>
-      <tr>
-        <th>Key</th>
-        <th>Date</th>
-        <th>Store ID</th>
-        <th>Product ID</th>
-        <th>Category</th>
-        <th>Region</th>
-        <th>Inventory Level</th>
-        <th>Units Sold</th>
-        <th>Demand Forecast</th>
-        <th>Weather Condition</th>
-        <th>Holiday/Promotion</th>
-        <th>Actions</th>
-      </tr>
+      <tr>${headers.map(header => `<th>${header}</th>`).join("")}</tr>
     </thead>
     <tbody>`;
   inventory.forEach(item => {
-    table += `<tr>
-                <td>${item.key || ""}</td>
-                <td>${item["Date"] || ""}</td>
-                <td>${item["Store ID"] || ""}</td>
-                <td>${item["Product ID"] || ""}</td>
-                <td>${item["Category"] || ""}</td>
-                <td>${item["Region"] || ""}</td>
-                <td>${item["Inventory Level"] || ""}</td>
-                <td>${item["Units Sold"] || ""}</td>
-                <td>${item["Demand Forecast"] || ""}</td>
-                <td>${item["Weather Condition"] || ""}</td>
-                <td>${item["Holiday/Promotion"] || ""}</td>
-                <td><button onclick="editRecord('${item.key}')">Edit</button></td>
-              </tr>`;
+    table += `<tr>${headers.map(header => `<td>${item[header] || "N/A"}</td>`).join("")}</tr>`;
   });
   table += "</tbody></table>";
   inventoryContainer.innerHTML = table;
 }
 
-// Function to edit a record using a prompt (for simplicity)
-async function editRecord(key) {
-  const currentData = prompt("Enter new JSON data for record with key " + key + " (must be valid JSON):");
-  if (!currentData) return;
-  try {
-    const updatedData = JSON.parse(currentData);
-    const response = await fetch(workerURL + "?key=" + encodeURIComponent(key), {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updatedData)
-    });
-    const resultText = await response.text();
-    showToast(resultText);
-    fetchInventory();
-  } catch (error) {
-    showToast("Error updating record: " + error.message, true);
-  }
-}
-
-// Function to show toast notifications
+// Show toast notifications for user feedback
 function showToast(message, isError = false) {
   const toast = document.getElementById('toast');
   toast.textContent = message;
-  toast.style.backgroundColor = isError ? 'red' : 'green';
+  toast.style.backgroundColor = isError ? 'red' : '#28a745';
   toast.classList.add('show');
   setTimeout(() => {
     toast.classList.remove('show');
