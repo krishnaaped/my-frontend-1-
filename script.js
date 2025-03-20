@@ -45,14 +45,17 @@ async function fetchInventory() {
   try {
     const response = await fetch(workerURL, { method: 'GET' });
     if (!response.ok) throw new Error("Failed to fetch inventory");
+
     const inventory = await response.json();
-    console.log("Fetched Inventory Data:", inventory);
+    console.log("Fetched Inventory Data:", inventory); // ✅ Debugging log
+
     displayInventory(inventory);
     showToast("Inventory refreshed.");
   } catch (error) {
     showToast("Error fetching inventory: " + error.message, true);
   }
 }
+
 
 // Dynamically generate the inventory table with an edit button for each record
 function displayInventory(inventory) {
